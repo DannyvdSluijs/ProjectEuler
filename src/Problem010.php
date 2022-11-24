@@ -13,11 +13,12 @@ class Problem010
     public function __invoke(): string
     {
         $total = 0;
-        for ($i = 3; $i < 2000000; $i += 2) :
-            if ($this->isPrime($i)) :
+
+        for ($i = 1; $i < 2_000_000; ++$i) {
+            if ($this->isPrime($i)) {
                 $total += $i;
-            endif;
-        endfor;
+            }
+        }
 
         return (string) $total;
     }
