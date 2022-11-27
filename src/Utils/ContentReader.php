@@ -48,4 +48,11 @@ trait ContentReader
     {
         return array_map(str_split(...), $this->readInputAsLines());
     }
+
+    /** @return array<int, int> */
+    public function readInputAsGridOfNumbers(): array
+    {
+        $lines = $this->readInputAsLines();
+        return array_map(static fn($line) => array_map(intval(...), explode(' ', $line)), $lines);
+    }
 }

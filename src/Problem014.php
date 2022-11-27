@@ -8,34 +8,44 @@ class Problem014
 {
     public function __invoke(): string
     {
-        $out = 0;
+        $range = range(0, 1000000);
 
-        for ($i = 1000000; $i > 0; $i--) {
-            $tmp = $this->calcChain($i);
-            if ($tmp > $out) {
-                $out = $tmp;
+        unset($range[0]);
+        $max = 0;
+        $maxStartingNumber = 0;
+
+        foreach (array_reverse(array_keys($range)) as $key) {
+            if (!array_key_exists($key, $range)) {
+                continue;
+            }
+            $value = $range[$key];
+
+            // Get Collatz sequence
+            $sequence = $this->collatz($value);
+            $sequenceCount = count($sequence);
+            if ($sequenceCount > $max) {
+                $max = $sequenceCount;
+                $maxStartingNumber = $value;
+            }
+
+            // Unset all keys after first
+            array_shift($sequence);
+            foreach ($sequence as $item) {
+                unset($range[$item]);
             }
         }
-        return (string) $out;
+
+        return (string) $maxStartingNumber;
     }
 
-    public function calcChain($int)
+    private function collatz(int $int)
     {
-        $chainsize = 1;
-
-        while ($int > 1) {
-            $int = $this->nextInChain($int);
-            $chainsize++;
+        $result = [$int];
+        while ($int !== 1) {
+            $int % 2 === 0 ? $int /= 2 : $int = $int * 3 + 1;
+            $result[] = $int;
         }
-        return $chainsize;
-    }
 
-    public function nextInChain($int)
-    {
-        if ($int % 2 == 0) {
-            return ($int / 2);
-        } else {
-            return (3 * $int + 1);
-        }
+        return $result;
     }
 }

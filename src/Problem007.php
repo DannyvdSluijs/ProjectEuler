@@ -22,7 +22,7 @@ class Problem007
             if ($primes === 10001) :
                 return (string) $i;
             endif;
-            $i += 2;
+            $i++;
         endwhile;
     }
 }
