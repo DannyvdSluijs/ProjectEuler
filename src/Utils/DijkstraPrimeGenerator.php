@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dannyvandersluijs\ProjectEuler\Utils;
 
-class PrimeGenerator
+class DijkstraPrimeGenerator
 {
     private int $current = 2;
     
@@ -35,7 +35,8 @@ class PrimeGenerator
                 $this->pool[] = ['prime' => $this->current, 'multiple' => $this->current ** 2];
                 yield $this->current;
             } else {
-                foreach ($this->pool as $key => $item) {
+                $matches = array_filter($this->pool, fn($item) => $item['multiple'] === $smallestMultipleFromPool);
+                foreach ($matches as $key => $item) {
                     if ($item['multiple'] === $smallestMultipleFromPool) {
                         $this->pool[$key]['multiple'] += $item['prime'];
                     }

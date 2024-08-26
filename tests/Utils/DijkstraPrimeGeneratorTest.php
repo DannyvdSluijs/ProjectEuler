@@ -7,9 +7,8 @@ namespace Tests\Dannyvandersluijs\ProjectEuler\Utils;
 use Dannyvandersluijs\ProjectEuler\Utils\DijkstraPrimeGenerator;
 use PHPUnit\Framework\TestCase;
 
-class PrimeGeneratorTest extends TestCase
+class DijkstraPrimeGeneratorTest extends TestCase
 {
-
     public function testFirst10Primes(): void
     {
         $sut = new DijkstraPrimeGenerator();
