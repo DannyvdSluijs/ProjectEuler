@@ -17,4 +17,7 @@ $problemClassName = sprintf('\Dannyvandersluijs\ProjectEuler\Problem%03d', $prob
 
 $problem = new $problemClassName();
 
-printf("Solution to %d is: %s\r\n", $problemId, $problem->__invoke());
+$time_start = microtime(true);
+$solution = $problem->__invoke();
+$time_end = microtime(true);
+printf('Solution to %d is: %s (%f sec)' . PHP_EOL, $problemId, $solution, $time_end - $time_start);
